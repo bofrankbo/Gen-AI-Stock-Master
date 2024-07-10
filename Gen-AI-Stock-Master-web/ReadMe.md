@@ -7,5 +7,6 @@
 - about.html provides an introduction to this project and its contributors.
 - crawl.html helps you fetch the necessary data. (Please retrieve data daily.)
 - model.html allows you to train and test models to improve prompts.
+- contact.html help you to contact our team.
 ### Question?
 - please contact one of the contributor.(Website main designer is Yukimagi and ziwei)
