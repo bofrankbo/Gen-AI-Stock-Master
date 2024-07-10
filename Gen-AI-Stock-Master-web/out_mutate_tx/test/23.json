@@ -1,0 +1,122 @@
+{
+    "model": "gemini-1.5-flash",
+    "temperature": 1,
+    "top_p": 0.9,
+    "seed": 0,
+    "init_prompt": "## 驅動利多的創新策略：需求與投資的雙重驅動\n\n企業要想實現利多，其創新策略必須兼顧兩個關鍵要素：\n\n**1. 滿足客戶需求：** 創新應以解決客戶痛點、提供真正價值的產品或服務為核心。只有滿足客戶需求，創新才能獲得市場認可，進而推動利潤增長。\n\n**2. 吸引投資者關注：**  投資者的認可和支持是企業發展的關鍵驅動力。企業必須以創新吸引投資者的目光，獲得必要的資金和資源，才能持續推動創新發展，最終實現利多。\n\n**簡而言之，企業創新策略的成功關鍵在於以客戶需求為導向，同時贏得投資者的認可，形成需求與投資的雙重驅動，才能實現持續發展和利潤增長。** \n",
+    "mutate_prompt": "## 驅動利多的創新策略：需求與投資的雙重引擎\n\n企業要實現利多，創新策略必須以**需求與投資**這兩個關鍵引擎為驅動。\n\n**1. 需求驅動：** 成功的創新始於洞悉客戶需求，並提供解決痛點、創造價值的產品或服務。唯有滿足市場需求，創新才能獲得認可，帶來銷售增長和利潤提升。\n\n**2. 投資驅動：** 投資者的認可和資金支持是企業持續創新的基石。企業必須以創新吸引投資者，獲得必要的資源，才能推動技術進步、擴大市場份額，最終實現利潤最大化。\n\n**簡而言之，企業創新策略的成功之道，在於將客戶需求與投資者期望緊密結合，形成雙重驅動，才能實現持續發展和利潤增長。** \n",
+    "output_data": {
+        "20240513": {
+            "token": {
+                "input_tokens": 501,
+                "output_tokens": 2,
+                "total_tokens": 503
+            },
+            "raw_data": "#unknown \n"
+        },
+        "20240514": {
+            "token": {
+                "input_tokens": 625,
+                "output_tokens": 2,
+                "total_tokens": 627
+            },
+            "raw_data": "#unknown \n"
+        },
+        "20240515": {
+            "token": {
+                "input_tokens": 591,
+                "output_tokens": 2,
+                "total_tokens": 593
+            },
+            "raw_data": "#unknown \n"
+        },
+        "20240516": {
+            "token": {
+                "input_tokens": 584,
+                "output_tokens": 2,
+                "total_tokens": 586
+            },
+            "raw_data": "#yes \n"
+        },
+        "20240517": {
+            "token": {
+                "input_tokens": 523,
+                "output_tokens": 2,
+                "total_tokens": 525
+            },
+            "raw_data": "#unknown \n"
+        },
+        "20240520": {
+            "token": {
+                "input_tokens": 592,
+                "output_tokens": 2,
+                "total_tokens": 594
+            },
+            "raw_data": "#unknown \n"
+        },
+        "20240521": {
+            "token": {
+                "input_tokens": 634,
+                "output_tokens": 2,
+                "total_tokens": 636
+            },
+            "raw_data": "#yes \n"
+        },
+        "20240522": {
+            "token": {
+                "input_tokens": 644,
+                "output_tokens": 2,
+                "total_tokens": 646
+            },
+            "raw_data": "#yes \n"
+        },
+        "20240523": {
+            "token": {
+                "input_tokens": 639,
+                "output_tokens": 2,
+                "total_tokens": 641
+            },
+            "raw_data": "#unknown \n"
+        },
+        "20240524": {
+            "token": {
+                "input_tokens": 646,
+                "output_tokens": 2,
+                "total_tokens": 648
+            },
+            "raw_data": "#unknown \n"
+        },
+        "20240527": {
+            "token": {
+                "input_tokens": 496,
+                "output_tokens": 2,
+                "total_tokens": 498
+            },
+            "raw_data": "#unknown \n"
+        },
+        "20240528": {
+            "token": {
+                "input_tokens": 502,
+                "output_tokens": 2,
+                "total_tokens": 504
+            },
+            "raw_data": "#yes \n"
+        },
+        "20240529": {
+            "token": {
+                "input_tokens": 606,
+                "output_tokens": 2,
+                "total_tokens": 608
+            },
+            "raw_data": "#unknown \n"
+        },
+        "20240530": {
+            "token": {
+                "input_tokens": 469,
+                "output_tokens": 2,
+                "total_tokens": 471
+            },
+            "raw_data": "#unknown \n"
+        }
+    }
+}

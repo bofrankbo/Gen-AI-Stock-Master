@@ -1,0 +1,98 @@
+{
+    "model": "gemini-1.5-flash",
+    "temperature": 1,
+    "top_p": 0.9,
+    "seed": 0,
+    "init_prompt": "## 企業創新策略：利多關鍵要素\n\n為了達成企業創新策略的成功，需要滿足以下三個重要條件：\n\n**1. 滿足客戶需求：** 企業創新應以滿足客戶需求為首要目標。唯有理解客戶需求，才能創造出真正有價值的產品或服務，從而推動創新取得成功。\n\n**2. 吸引投資者關注：** 吸引投資者的關注和信心至關重要。這不僅僅是獲得資金支持，更能為企業創新提供必要資源和信任背書，進一步推動創新發展。\n\n**3. 促進股價增長：** 最終目標是促進股價增長，這需要企業創新策略能帶來實際效益，例如提升盈利能力、擴大市場份額等，從而實現股價的穩定增長。\n\n以上三點環環相扣，共同構成了企業創新策略成功的關鍵要素。\n",
+    "mutate_prompt": "## 企業創新策略：三要素解鎖成功\n\n企業創新策略的成功，需要三大關鍵要素相互配合，缺一不可：\n\n**1. 顧客為王：** 以滿足客戶需求為核心，洞悉市場趨勢，創造真正有價值的產品或服務，才能讓創新真正落地，獲得市場認可。\n\n**2. 資本加持：** 吸引投資者的關注和資金支持，為創新提供充足的資源和信任背書，才能持續推動創新發展，邁向成功。\n\n**3. 價值驅動：** 最終目標是促進股價增長，這需要創新策略帶來實際效益，例如提升盈利能力、擴大市場份額等，才能實現企業價值的提升和股價的穩定增長。\n\n三要素環環相扣，缺一不可，共同構成了企業創新策略成功的基石。 \n",
+    "output_data": {
+        "20240516": {
+            "token": {
+                "input_tokens": 577,
+                "output_tokens": 2,
+                "total_tokens": 579
+            },
+            "raw_data": "#yes \n"
+        },
+        "20240517": {
+            "token": {
+                "input_tokens": 516,
+                "output_tokens": 2,
+                "total_tokens": 518
+            },
+            "raw_data": "#yes \n"
+        },
+        "20240520": {
+            "token": {
+                "input_tokens": 585,
+                "output_tokens": 2,
+                "total_tokens": 587
+            },
+            "raw_data": "#unknown \n"
+        },
+        "20240521": {
+            "token": {
+                "input_tokens": 627,
+                "output_tokens": 2,
+                "total_tokens": 629
+            },
+            "raw_data": "#yes \n"
+        },
+        "20240522": {
+            "token": {
+                "input_tokens": 637,
+                "output_tokens": 2,
+                "total_tokens": 639
+            },
+            "raw_data": "#yes \n"
+        },
+        "20240523": {
+            "token": {
+                "input_tokens": 632,
+                "output_tokens": 2,
+                "total_tokens": 634
+            },
+            "raw_data": "#yes \n"
+        },
+        "20240524": {
+            "token": {
+                "input_tokens": 639,
+                "output_tokens": 2,
+                "total_tokens": 641
+            },
+            "raw_data": "#yes \n"
+        },
+        "20240527": {
+            "token": {
+                "input_tokens": 489,
+                "output_tokens": 2,
+                "total_tokens": 491
+            },
+            "raw_data": "#yes \n"
+        },
+        "20240528": {
+            "token": {
+                "input_tokens": 495,
+                "output_tokens": 2,
+                "total_tokens": 497
+            },
+            "raw_data": "#yes \n"
+        },
+        "20240529": {
+            "token": {
+                "input_tokens": 599,
+                "output_tokens": 2,
+                "total_tokens": 601
+            },
+            "raw_data": "#yes \n"
+        },
+        "20240530": {
+            "token": {
+                "input_tokens": 462,
+                "output_tokens": 2,
+                "total_tokens": 464
+            },
+            "raw_data": "#unknown \n"
+        }
+    }
+}

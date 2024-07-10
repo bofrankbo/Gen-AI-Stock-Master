@@ -1,0 +1,98 @@
+{
+    "model": "gemini-1.5-flash",
+    "temperature": 1,
+    "top_p": 0.9,
+    "seed": 0,
+    "init_prompt": "## 利多需要滿足以下條件：\n\n**企業創新策略**：這是一個核心要素，貫穿所有利多條件，包含：\n\n* **滿足客戶需求**：這是創新的根本目的，能否滿足客戶需求直接決定創新的成敗。\n* **吸引投資者關注**：投資者的支持至關重要，他們的關注和信心能提供必要的資金和資源，是創新成功的關鍵指標。\n\n簡而言之，利多需要建立在企業以滿足客戶需求為核心的創新策略上，並吸引投資者關注和支持，才能實現成功。\n",
+    "mutate_prompt": "## 利多成功的關鍵：以客戶為中心的創新策略\n\n利多需要建立在以客戶需求為中心的創新策略上，這包含以下兩個核心要素：\n\n**1. 滿足客戶需求：**創新的根本目的是解決客戶痛點，滿足其需求，只有這樣才能獲得市場認可和成功。\n\n**2. 吸引投資者關注：**投資者是創新發展的關鍵支撐，他們的關注和投資能提供必要的資金和資源。因此，企業需要展示其創新策略的價值和潛力，以吸引投資者的支持。\n\n簡而言之，利多需要在滿足客戶需求的同時，吸引投資者的關注和投資，才能實現可持續發展和成功。\n",
+    "output_data": {
+        "20240516": {
+            "token": {
+                "input_tokens": 535,
+                "output_tokens": 2,
+                "total_tokens": 537
+            },
+            "raw_data": "#yes \n"
+        },
+        "20240517": {
+            "token": {
+                "input_tokens": 474,
+                "output_tokens": 2,
+                "total_tokens": 476
+            },
+            "raw_data": "#unknown \n"
+        },
+        "20240520": {
+            "token": {
+                "input_tokens": 543,
+                "output_tokens": 2,
+                "total_tokens": 545
+            },
+            "raw_data": "#unknown \n"
+        },
+        "20240521": {
+            "token": {
+                "input_tokens": 585,
+                "output_tokens": 2,
+                "total_tokens": 587
+            },
+            "raw_data": "#unknown \n"
+        },
+        "20240522": {
+            "token": {
+                "input_tokens": 595,
+                "output_tokens": 2,
+                "total_tokens": 597
+            },
+            "raw_data": "#yes \n"
+        },
+        "20240523": {
+            "token": {
+                "input_tokens": 590,
+                "output_tokens": 2,
+                "total_tokens": 592
+            },
+            "raw_data": "#unknown \n"
+        },
+        "20240524": {
+            "token": {
+                "input_tokens": 597,
+                "output_tokens": 2,
+                "total_tokens": 599
+            },
+            "raw_data": "#unknown \n"
+        },
+        "20240527": {
+            "token": {
+                "input_tokens": 447,
+                "output_tokens": 2,
+                "total_tokens": 449
+            },
+            "raw_data": "#yes \n"
+        },
+        "20240528": {
+            "token": {
+                "input_tokens": 453,
+                "output_tokens": 2,
+                "total_tokens": 455
+            },
+            "raw_data": "#unknown \n"
+        },
+        "20240529": {
+            "token": {
+                "input_tokens": 557,
+                "output_tokens": 2,
+                "total_tokens": 559
+            },
+            "raw_data": "#unknown \n"
+        },
+        "20240530": {
+            "token": {
+                "input_tokens": 420,
+                "output_tokens": 2,
+                "total_tokens": 422
+            },
+            "raw_data": "#unknown \n"
+        }
+    }
+}
