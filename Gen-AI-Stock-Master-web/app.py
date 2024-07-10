@@ -68,7 +68,6 @@ def root():
 
 @app.route("/news_title_submit",methods=["GET", "POST"])
 def news_title_submit():
-    # 定义数据列表
     data = [
          ["2330", "台積電", "31.7881%"],
          ["2317", "鴻海", "3.3553%"],
@@ -82,16 +81,16 @@ def news_title_submit():
          ["2891", "中信金", "1.0382%"]
     ]
 
-    # 读取上次的 end_date
+    # 讀之前的end_date
     end_date = datetime.now() - timedelta(days=1)
     start_date = news_title.read_last_date()
 
-    # 如果没有上次的记录，默认从 2023 年 6 月 1 日开始
+    # 如果沒有上次紀錄從默認時間開始
     if start_date is None:
         start_date = datetime(2023, 6, 1)
 
     try:
-        # 抓取新闻标题并存储为 JSON 文件
+        # 抓新聞標題，並設為.json
         for idx, stock in enumerate(data):
             stock_name = stock[1]
             headlines = news_title.crawl_google_news_headlines(start_date, end_date, stock_name)
