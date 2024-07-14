@@ -14,6 +14,7 @@ To set up the project, follow these steps:
 - **about.html**: Provides an introduction to this project and its contributors.
 - **crawl.html**: Helps you fetch the necessary data. (Please retrieve data daily.)
 - **model.html**: Allows you to train and test models to improve prompts.
+- **predict.html**: Allows you to predict stock by customized prompt.
 - **contact.html**: Helps you contact our team.
 
 ## Questions?
