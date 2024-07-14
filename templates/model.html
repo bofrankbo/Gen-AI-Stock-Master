@@ -38,6 +38,7 @@
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="about.html">About</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="crawl.html">Crawl</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="model.html">Model</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="predict.html">Predict</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="contact.html">Contact</a></li>
                     </ul>
                 </div>
@@ -75,6 +76,12 @@
                                 <label for="endDate">結束日期: </label>
                                 <input type="date" id="endDate" name="endDate">
                             </div>
+                            <div class="a2">
+                                <label for="targetValue">訓練目標值: </label>
+                                <input type="number" id="targetValue" name="targetValue" step="0.01" min="0" max="1">
+                            </div>
+                        </div>
+                        <div class="a1">
                             <div class="a2">
                                 <div class="a3">
                                     <button onclick="run_model()" class="a4">訓練模型</button>
@@ -126,15 +133,21 @@
             function run_model() {
                 const startDate = document.getElementById('startDate').value;
                 const endDate = document.getElementById('endDate').value;
+                const targetValue = parseFloat(document.getElementById('targetValue').value);
                 const loadingMessage = document.getElementById('loadingMessage');
             
+                if (isNaN(targetValue) || targetValue < 0 || targetValue > 1) {
+                    alert('訓練目標值必須在0到1之間');
+                    return;
+                }
+
                 // 顯示正在訓練中的訊息
                 loadingMessage.style.display = 'block';
             
                 $.ajax({
                     url: "run_model",
                     type: "GET",
-                    data: { start_date: startDate, end_date: endDate },
+                    data: { start_date: startDate, end_date: endDate, target_value: targetValue },
                     success: function(result) {
                         // 隱藏正在訓練中的訊息
                         loadingMessage.style.display = 'none';
@@ -148,22 +161,6 @@
                 });
             }
             
-            
-        
-            function submit2() {
-                $.ajax({
-                    url: "submit",
-                    type: "GET",
-                    data: { path: "./static/假音.flac" },
-                    success: function(result) {
-                        if (result.message == "success!") {
-                            alert("這個聲音是" + result.rest);
-                        } else {
-                            alert(result.message);
-                        }
-                    }
-                });
-            }
         </script>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>

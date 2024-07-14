@@ -48,7 +48,7 @@ def crawl_google_news_headlines(start_date, end_date, stock_name):
 
 def read_last_date(file_path='history_data/tw/news_title/2330news_title.json'):
     if os.path.exists(file_path):
-        with open(file_path, 'r', newline='') as file:
+        with open(file_path, 'r', encoding='UTF-8',newline='') as file:
             data = json.load(file)
 
             sorted_dates = sorted(data.keys())

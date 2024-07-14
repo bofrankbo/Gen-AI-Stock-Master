@@ -45,6 +45,10 @@ app = Flask(__name__)
 def model():
     return render_template("model.html")
 
+@app.route("/predict.html")
+def predict():
+    return render_template("predict.html")
+
 @app.route("/about.html")
 def about():
     return render_template("about.html")
@@ -130,10 +134,15 @@ def run_model():
         # 從請求中獲取日期
         start_date_str = request.args.get('start_date')
         end_date_str = request.args.get('end_date')
+        target_value = float(request.args.get('target_value'))
         
         # 解析日期
         start_day = datetime.strptime(start_date_str, '%Y-%m-%d')
         end_day = datetime.strptime(end_date_str, '%Y-%m-%d')
+        
+        # 檢查目標值範圍
+        if target_value < 0 or target_value > 1:
+            return jsonify({'message': '訓練目標值必須在0到1之間'}), 400
         
         
         model = 'gemini-1.5-flash'
@@ -227,7 +236,7 @@ def run_model():
             accs.append(acc)
             evs.append(ev)
             
-            if  acc > 0.75:
+            if  acc >= target_value:
                 #print("============ prompt ==========")
                 with open(outpath, 'r', encoding='utf-8') as f:
                     data = json.load(f)
@@ -236,7 +245,7 @@ def run_model():
                     break
                 #print("==============================")
                 #print()
-            return {'message':"acc<75% please training longer or give more data."}
+            return {'message':"accuracy smaller than target value please training longer or give more data."}
         #return {'message':"Prompt:"+data+"\nAccuracy:"+acc*100+"%"}
 
     except Exception as e:
@@ -340,7 +349,53 @@ def twii_submit():
     except Exception as e:
         error_msg = f"Failed to update twii: {str(e)}"
         return {'message':error_msg}
+    
+    
+@app.route("/predict_stock", methods=["GET", "POST"])
+def predict_stock():
+    try:
+        model = 'gemini-1.5-flash'
+        temperature = 1
+        top_p = 0.9
+        seed = 0
+        load_dotenv()
 
+        llm = ChatGoogleGenerativeAI(
+                        #https://aistudio.google.com/app/u/1/apikey #api key查詢
+                        google_api_key = os.getenv('GOOGLE_API_KEY'),
+                        model=model,
+                        temperature=temperature,
+                        top_p=top_p,
+                        seed=seed,
+                        safety_settings={
+                                HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_NONE,
+                                HarmCategory.HARM_CATEGORY_HARASSMENT: HarmBlockThreshold.BLOCK_NONE,
+                                HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_NONE,
+                                HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT : HarmBlockThreshold.BLOCK_NONE,
+                        
+                    })
+        # 從請求中獲取prompt
+        text_in = request.args.get('prompt')
+        
+        messages = [
+            ("human",
+            f"""
+            請針對以下指令判斷股市是否可能獲利，有可能請則只回答#yes，否則只回答#no，如果無關則回答#unknown，請盡量不要回答#unknown:{text_in}
+            """)
+        ]
+        response = llm.invoke(messages)
+        response_content = response.content  # 回覆的內容
+        print(response_content)
+
+        return jsonify({'content': response_content, 'message': 'success predict'})
+    except Exception as e:
+        error_msg = f"Failed to predict: {str(e)}"
+        return jsonify({'message': error_msg}), 500
+    
+    
 if __name__ == '__main__':
     #定義app在8080埠運行
     app.run(host="0.0.0.0",port=8000,debug=True)
+    
+
+
