@@ -375,12 +375,19 @@ def predict_stock():
                         
                     })
         # 從請求中獲取prompt
-        text_in = request.args.get('prompt')
+        prompt_in = request.args.get('prompt')
+        news_in = request.args.get('news')
         
         messages = [
             ("human",
             f"""
-            請針對以下指令判斷股市是否可能獲利，有可能請則只回答#yes，否則只回答#no，如果無關則回答#unknown，請盡量不要回答#unknown:{text_in}
+            以下是台灣股市權值股的新聞標題，
+            {news_in}
+
+            請依據以下判斷依據判斷權值股對大盤（實際操作使用台指期）隔日開盤時買進收盤時賣出的獲利可能性
+            {prompt_in}
+                
+            請綜合以上資訊，判斷明日當沖台指期是否可能獲利，有可能請則只回答#yes，否則只回答#no，如果無關則回答#unknown，請盡量不要回答 #unknown
             """)
         ]
         response = llm.invoke(messages)

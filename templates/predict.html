@@ -7,6 +7,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>Predict_Gen-AI Stock Master</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="icon" type="image/x-icon" href="../static/assets/favicon.ico" />
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
@@ -130,8 +131,12 @@
                 <div class="col-md-10 col-lg-8 col-xl-7">
                     <div class="a1">
                         <div class="a2">
-                            <label for="promptInput"> 輸入指令</label>
+                            <label for="promptInput"> 輸入指令 </label>
                             <textarea id="promptInput" name="promptInput" rows="5" cols="40"></textarea>
+                        </div>
+                        <div class="a2">
+                            <label for="newsInput"> 輸入新聞 </label>
+                            <textarea id="newsInput" name="newsInput" rows="5" cols="40"></textarea>
                         </div>
                         <div class="a2">
                             <div class="a3">
@@ -183,6 +188,7 @@
     <script>
         function predict_stock() {
             const promptInput = document.getElementById('promptInput').value;
+            const newsInput = document.getElementById('newsInput').value;
             const loadingMessage = document.getElementById('loadingMessage');
 
             if (!promptInput) {
@@ -196,7 +202,7 @@
             $.ajax({
                 url: "predict_stock",
                 type: "GET",
-                data: { prompt: promptInput },
+                data: { prompt: promptInput, news: newsInput },
                 success: function (result) {
                     // 隱藏正在預測中的訊息
                     loadingMessage.style.display = 'none';
