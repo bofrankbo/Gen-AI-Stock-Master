@@ -1,7 +1,7 @@
 # Website for Better Training and Testing
 
 ## Set Up
-This project requires python version 3.11.7
+This project requires python version 3.11.7  
 To set up the project, follow these steps:
 1. Install the required Python packages:
     ```sh
