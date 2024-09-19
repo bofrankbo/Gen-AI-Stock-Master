@@ -1,7 +1,7 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify , Response, stream_with_context
 import news_title
 from run_mutate_TX import step1, step2, eval,to_markdown
-#import twii
+from tqdm import tqdm
 
 import os
 import time
@@ -69,64 +69,153 @@ def crawl():
 def root():
     return render_template("index.html")
 
+# SSE，用來發送進度
+@app.route("/progress")
+def progress():
+    def fetch_news_for_date(date, stock_name):
+        date_formatted = date.strftime('%m/%d/%Y').lstrip("0").replace(" 0", " ")
+        url = f"https://www.google.com/search?q={stock_name}&tbs=cdr:1,cd_min:{date_formatted},cd_max:{date_formatted}&tbm=nws&start=0"
+        headers = {
+            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.82 Safari/537.36"
+        }
 
-@app.route("/news_title_submit",methods=["GET", "POST"])
-def news_title_submit():
-    data = [
-         ["2330", "台積電", "31.7881%"],
-         ["2317", "鴻海", "3.3553%"],
-         ["2454", "聯發科", "2.462%"],
-         ["2382", "廣達", "1.5581%"],
-         ["2412", "中華電", "1.4924%"],
-         ["2881", "富邦金", "1.3953%"],
-         ["2308", "台達電", "1.2916%"],
-         ["2882", "國泰金", "1.1493%"],
-         ["6505", "台塑化", "1.0671%"],
-         ["2891", "中信金", "1.0382%"]
-    ]
+        for _ in range(3):
+            try:
+                response = requests.get(url, headers=headers)
+                response.raise_for_status()
+                soup = BeautifulSoup(response.text, "html.parser")
+                elements = soup.find_all('div', class_='n0jPhd ynAwRc MBeuO nDgy9d')
+                headlines = [element.text for element in elements]
+                return date_formatted, headlines
+            except requests.RequestException as e:
+                print(f"錯誤獲取新聞 {date_formatted}: {e}")
+                time.sleep(random.uniform(1, 3))
+        return date_formatted, []
 
-    # 讀之前的end_date
-    end_date = datetime.now() - timedelta(days=1)
-    start_date = news_title.read_last_date()
-    print(f"start_date: {start_date}")
+    def crawl_google_news_headlines(start_date, end_date, stock_name, existing_data):
+        headlines_by_date = existing_data.copy()
+        dates = [start_date + timedelta(days=i) for i in range((end_date - start_date).days + 1)]
+        dates_to_fetch = [date for date in dates if date.strftime('%Y%m%d') not in headlines_by_date]
 
-    # 如果沒有上次紀錄從默認時間開始
-    if start_date is None:
-        start_date = datetime(2023, 6, 1)
+        with concurrent.futures.ThreadPoolExecutor() as executor:
+            futures = {executor.submit(fetch_news_for_date, date, stock_name): date for date in dates_to_fetch}
+            for future in tqdm(concurrent.futures.as_completed(futures), total=len(futures), desc=f"爬取 {stock_name} 的新聞"):
+                date_formatted, headlines = future.result()
+                date_formatted2 = datetime.strptime(date_formatted, '%m/%d/%Y').strftime('%Y%m%d')
+                headlines_by_date[date_formatted2] = headlines
 
-    try:
-        # 抓新聞標題，並設為.json
+        return headlines_by_date
+
+    def generate():
+        print("開始抓取新聞")
+        data = [
+            ["2330", "台積電", "31.7881%"],
+            ["2317", "鴻海", "3.3553%"],
+            ["2454", "聯發科", "2.462%"],
+            ["2382", "廣達", "1.5581%"],
+            ["2412", "中華電", "1.4924%"],
+            ["2881", "富邦金", "1.3953%"],
+            ["2308", "台達電", "1.2916%"],
+            ["2882", "國泰金", "1.1493%"],
+            ["6505", "台塑化", "1.0671%"],
+            ["2891", "中信金", "1.0382%"]
+        ]
+
+        end_date = datetime.now() - timedelta(days=1)
+        start_date = datetime(2023, 6, 1)  # 根據您的應用修改
+
         for idx, stock in enumerate(data):
             stock_name = stock[1]
-            print(f"update {stock_name} from {start_date} to {end_date}")
-            headlines = news_title.crawl_google_news_headlines(start_date, end_date, stock_name)
-            # json_content = json.dumps(headlines, ensure_ascii=False, indent=4)
-
-            path = os.path.join("history_data/tw/news_title", stock[0] + "news_title.json")
+            # 模擬抓取新聞，實際上這裡調用您的抓取函數
+            time.sleep(1)  # 假設每家公司需要 1 秒來爬取新聞
+            path = os.path.join("history_data", "tw", "news_title", stock[0] + "news_title.json")
             os.makedirs(os.path.dirname(path), exist_ok=True)
-            # 讀取已存在的 JSON 檔案或創建新的 JSON
+
+            # 讀取現有的 JSON 檔案
             if os.path.exists(path):
                 with open(path, "r", encoding="UTF-8") as f:
                     existing_data = json.load(f)
             else:
                 existing_data = {}
 
-            # 更新或新增資料
-            for date, news in headlines.items():
-                if date in existing_data:
-                    existing_data[date].extend(news)
-                else:
-                    existing_data[date] = news
+            # 爬取缺少的資料
+            headlines = crawl_google_news_headlines(start_date, end_date, stock_name, existing_data)
 
-            # 寫入更新後的 JSON 檔案
-            with open(path, "w", encoding="UTF-8") as f:
-                json.dump(existing_data, f, ensure_ascii=False, indent=4)
+            # 將資料按照日期排序
+            sorted_headlines = dict(sorted(headlines.items()))
 
-        return {'message':"success update news title!"}
+            json_content = json.dumps(sorted_headlines, ensure_ascii=False, indent=4)
 
-    except Exception as e:
-        error_msg = f"Failed to fetch or store news titles: {str(e)}"
-        return {'message':error_msg}
+            with open(path , "w", encoding="UTF-8") as f:
+                f.write(json_content)
+            yield f"data: 已更新 {stock_name} ({idx + 1}/{len(data)})\n\n"
+        yield "data: 抓取完成!\n\n"
+
+    return Response(stream_with_context(generate()), content_type='text/event-stream')
+
+# 主路由，用來開始抓取新聞
+@app.route("/news_title_submit", methods=["GET", "POST"])
+def news_title_submit():
+    return jsonify({'message': "開始抓取新聞!"})
+
+
+# @app.route("/news_title_submit",methods=["GET", "POST"])
+# def news_title_submit():
+#     data = [
+#          ["2330", "台積電", "31.7881%"],
+#          ["2317", "鴻海", "3.3553%"],
+#          ["2454", "聯發科", "2.462%"],
+#          ["2382", "廣達", "1.5581%"],
+#          ["2412", "中華電", "1.4924%"],
+#          ["2881", "富邦金", "1.3953%"],
+#          ["2308", "台達電", "1.2916%"],
+#          ["2882", "國泰金", "1.1493%"],
+#          ["6505", "台塑化", "1.0671%"],
+#          ["2891", "中信金", "1.0382%"]
+#     ]
+
+#     # 讀之前的end_date
+#     end_date = datetime.now() - timedelta(days=1)
+#     start_date = news_title.read_last_date()
+#     print(f"start_date: {start_date}")
+
+#     # 如果沒有上次紀錄從默認時間開始
+#     if start_date is None:
+#         start_date = datetime(2023, 6, 1)
+
+#     try:
+#         # 抓新聞標題，並設為.json
+#         for idx, stock in enumerate(data):
+#             stock_name = stock[1]
+#             print(f"update {stock_name} from {start_date} to {end_date}")
+#             headlines = news_title.crawl_google_news_headlines(start_date, end_date, stock_name)
+#             # json_content = json.dumps(headlines, ensure_ascii=False, indent=4)
+
+#             path = os.path.join("history_data/tw/news_title", stock[0] + "news_title.json")
+#             os.makedirs(os.path.dirname(path), exist_ok=True)
+#             # 讀取已存在的 JSON 檔案或創建新的 JSON
+#             if os.path.exists(path):
+#                 with open(path, "r", encoding="UTF-8") as f:
+#                     existing_data = json.load(f)
+#             else:
+#                 existing_data = {}
+
+#             # 更新或新增資料
+#             for date, news in headlines.items():
+#                 if date in existing_data:
+#                     existing_data[date].extend(news)
+#                 else:
+#                     existing_data[date] = news
+
+#             # 寫入更新後的 JSON 檔案
+#             with open(path, "w", encoding="UTF-8") as f:
+#                 json.dump(existing_data, f, ensure_ascii=False, indent=4)
+
+#         return {'message':"success update news title!"}
+
+#     except Exception as e:
+#         error_msg = f"Failed to fetch or store news titles: {str(e)}"
+#         return {'message':error_msg}
     
 @app.route("/run_model",methods=["GET", "POST"])
 def run_model():

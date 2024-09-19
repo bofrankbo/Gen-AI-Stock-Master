@@ -101,7 +101,7 @@
                 <div class="col-md-10 col-lg-8 col-xl-7">
                     <div class="post-heading">
                         <h1>News Crawler</h1>
-                        <h2 class="subheading">每日檢索並獲取必要的數據。</h2>
+                        <h2 class="subheading">每日檢索並更新到最新的數據。</h2>
                         <!--<span class="meta">
                             Posted by
                             <a href="post.htnl">Gen-AI Stock Master Team</a>
@@ -112,37 +112,71 @@
             </div>
         </div>
     </header>
-    <!-- Main Content-->
+    <!-- Main Content -->
     <div class="container px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <!-- Post preview-->
                 <div class="a1">
+                    <!-- 更新台指期資料 -->
                     <div class="a2">
                         <div id="newsTitle" class="a3">
                             更新台指期資料
                         </div>
                         <div class="a3">
                             <button onclick="twii_submit()" class="crawler-button">開始</button>
+                            <p> 用動態爬蟲爬台指期資料 </p>
                         </div>
-
                     </div>
+                    
                     <div class="divider"></div>
+
+                    <!-- 更新新聞標題 -->
                     <div class="a2">
                         <div id="newsTitle" class="a3">
                             更新新聞標題
                         </div>
+                        <!-- 新聞抓取進度顯示 --> 
                         <div class="a3">
-                            <button onclick="news_title_submit()" class="crawler-button">開始</button>
+                            <button onclick="startNewsProgress()" class="crawler-button">開始</button>
+                            <p>  </p>
+                            <div id="progress"></div>
                         </div>
-                    </div>
+                        
 
+                    </div>
                 </div>
 
                 <!--<div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">Older Posts →</a></div>-->
             </div>
         </div>
     </div>
+
+    <script>
+    // 定義進度事件源，在按下按鈕後才啟動
+    function startNewsProgress() {
+        const progressDiv = document.getElementById('progress');
+        progressDiv.innerHTML = '';  // 清空之前的內容
+
+        // 初始化 SSE 連接
+        const eventSource = new EventSource('/progress');
+
+        eventSource.onmessage = function(event) {
+            progressDiv.innerHTML += event.data + '<br>';  // 更新進度顯示
+        };
+
+        eventSource.onerror = function(event) {
+            progressDiv.innerHTML += "";  // 進度完成後顯示
+            eventSource.close();  // 關閉 SSE 連接
+        };
+    }
+
+    // 定義台指期資料提交的函數
+    function twii_submit() {
+        // 這裡寫入你處理台指期資料的代碼
+    }
+    </script>
+
     <!-- Footer-->
     <footer class="border-top">
         <div class="container px-4 px-lg-5">
