@@ -123,6 +123,8 @@ def progress():
 
         end_date = datetime.now() - timedelta(days=1)
         start_date = datetime(2023, 6, 1)  # 根據您的應用修改
+        news_preview = "權值股的熱門新聞標題"
+        path_preview = "static/predict_preview.json"
 
         for idx, stock in enumerate(data):
             stock_name = stock[1]
@@ -143,13 +145,26 @@ def progress():
 
             # 將資料按照日期排序
             sorted_headlines = dict(sorted(headlines.items()))
-
             json_content = json.dumps(sorted_headlines, ensure_ascii=False, indent=4)
+
+            # 取得最後一天的資料
+            # 將字符串轉換為 JSON 物件
+            json_data = json.loads(json_content)
+            news_preview += f"{json_data[end_date.strftime('%Y%m%d')]} \n"
 
             with open(path , "w", encoding="UTF-8") as f:
                 f.write(json_content)
+
+            with open(path_preview, 'r', encoding='utf-8') as f:
+                file_data = json.load(f)
+            file_data["newsInput"] = news_preview
+            with open(path_preview, 'w', encoding='utf-8') as f:
+                json.dump(file_data, f, ensure_ascii=False, indent=4)
+
             yield f"data: 已更新 {stock_name} ({idx + 1}/{len(data)})\n\n"
         yield "data: 抓取完成!\n\n"
+
+        
 
     return Response(stream_with_context(generate()), content_type='text/event-stream')
 
@@ -158,64 +173,6 @@ def progress():
 def news_title_submit():
     return jsonify({'message': "開始抓取新聞!"})
 
-
-# @app.route("/news_title_submit",methods=["GET", "POST"])
-# def news_title_submit():
-#     data = [
-#          ["2330", "台積電", "31.7881%"],
-#          ["2317", "鴻海", "3.3553%"],
-#          ["2454", "聯發科", "2.462%"],
-#          ["2382", "廣達", "1.5581%"],
-#          ["2412", "中華電", "1.4924%"],
-#          ["2881", "富邦金", "1.3953%"],
-#          ["2308", "台達電", "1.2916%"],
-#          ["2882", "國泰金", "1.1493%"],
-#          ["6505", "台塑化", "1.0671%"],
-#          ["2891", "中信金", "1.0382%"]
-#     ]
-
-#     # 讀之前的end_date
-#     end_date = datetime.now() - timedelta(days=1)
-#     start_date = news_title.read_last_date()
-#     print(f"start_date: {start_date}")
-
-#     # 如果沒有上次紀錄從默認時間開始
-#     if start_date is None:
-#         start_date = datetime(2023, 6, 1)
-
-#     try:
-#         # 抓新聞標題，並設為.json
-#         for idx, stock in enumerate(data):
-#             stock_name = stock[1]
-#             print(f"update {stock_name} from {start_date} to {end_date}")
-#             headlines = news_title.crawl_google_news_headlines(start_date, end_date, stock_name)
-#             # json_content = json.dumps(headlines, ensure_ascii=False, indent=4)
-
-#             path = os.path.join("history_data/tw/news_title", stock[0] + "news_title.json")
-#             os.makedirs(os.path.dirname(path), exist_ok=True)
-#             # 讀取已存在的 JSON 檔案或創建新的 JSON
-#             if os.path.exists(path):
-#                 with open(path, "r", encoding="UTF-8") as f:
-#                     existing_data = json.load(f)
-#             else:
-#                 existing_data = {}
-
-#             # 更新或新增資料
-#             for date, news in headlines.items():
-#                 if date in existing_data:
-#                     existing_data[date].extend(news)
-#                 else:
-#                     existing_data[date] = news
-
-#             # 寫入更新後的 JSON 檔案
-#             with open(path, "w", encoding="UTF-8") as f:
-#                 json.dump(existing_data, f, ensure_ascii=False, indent=4)
-
-#         return {'message':"success update news title!"}
-
-#     except Exception as e:
-#         error_msg = f"Failed to fetch or store news titles: {str(e)}"
-#         return {'message':error_msg}
     
 @app.route("/run_model",methods=["GET", "POST"])
 def run_model():
@@ -307,35 +264,23 @@ def run_model():
                 # 如果stack只剩下一個prompt，移除變異次數限制
                 mutate_count = 0
                 print("Single prompt in stack, removing mutation limit.")
-
-            # 終止條件
-            run_count += 1
-            # 設定變異次數上限
-            if run_count > 6:
-                print("Run out of run count.")
-                print(prompt_stack)
-                print(mutate_count)
-                break
-        accs = []
-        evs = []
-        for i in range(1):
-            print(f"Run count: {i+1}")
-            outpath = "out_mutate_tx/test/" + str(i+1) + ".json"
-            acc, ev = eval(outpath)
-            accs.append(acc)
-            evs.append(ev)
             
-            if  acc >= target_value:
+            path_prewiew = "static/predict_preview.json"
+            with open(path_prewiew, 'r', encoding='utf-8') as f:
+                file_data = json.load(f)
+            # 放表現最好的prompt
+            file_data["promptInput"] = prompt_stack[-1][0]
+            with open(path_prewiew, 'w', encoding='utf-8') as f:
+                json.dump(file_data, f, ensure_ascii=False, indent=4)
+            
+            if acc >= target_value:
                 #print("============ prompt ==========")
                 with open(outpath, 'r', encoding='utf-8') as f:
                     data = json.load(f)
                     #print(data["mutate_prompt"])
-                    return {'message':"Prompt:"+data["mutate_prompt"]+"\nAccuracy:"+str(acc*100)+"%"}
-                    break
+                return {'message':"Prompt:"+data["mutate_prompt"]+"\nAccuracy:"+str(acc*100)+"%"}
                 #print("==============================")
-                #print()
-            return {'message':"accuracy smaller than target value please training longer or give more data."}
-        #return {'message':"Prompt:"+data+"\nAccuracy:"+acc*100+"%"}
+            # return {'message':"accuracy smaller than target value please training longer or give more data."}
 
     except Exception as e:
         error_msg = f"Failed to run model: {str(e)}"

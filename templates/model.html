@@ -55,10 +55,24 @@
             transition: border-color 0.3s ease;
         }
 
-        .a2 input:focus {
-            border-color: #272727;
-            outline: none;
+        .a2 input:focus,
+        .a2 select:focus {
+            border-color: #272727;  /* 設定選擇框與日期框的邊框顏色 */
+            outline: none;          /* 移除預設的外框 */
         }
+
+        /* 統一選擇框與日期框的基本樣式 */
+        .a2 select,
+        .a2 input[type="date"] {
+            padding: 5px;            /* 統一內邊距 */
+            border: 1px solid #ccc;   /* 設定一致的邊框 */
+            border-radius: 4px;       /* 統一圓角 */
+            font-size: 16px;          /* 統一字體大小 */
+            appearance: none;         /* 移除預設的瀏覽器樣式 */
+            -moz-appearance: none;    /* 適用於 Firefox */
+            -webkit-appearance: none; /* 適用於 WebKit 瀏覽器 */
+        }
+
 
         .a3 {
             display: flex;
@@ -120,7 +134,7 @@
                 <div class="col-md-10 col-lg-8 col-xl-7">
                     <div class="post-heading">
                         <h1>Model Testing</h1>
-                        <h2 class="subheading">訓練和測試模型，以改進提示。</h2>
+                        <h2 class="subheading">訓練改進提示。</h2>
                         <!--<span class="meta">
                             Posted by
                             <a href="post.htnl">Gen-AI Stock Master Team</a>
@@ -145,10 +159,38 @@
                             <label for="endDate">結束日期 : </label>
                             <input type="date" id="endDate" name="endDate">
                         </div>
+                        
+                        <script>
+                            // 取得今天的日期
+                            const today = new Date();
+                            
+                            // 設定結束日期為今天
+                            const endDate = today.toISOString().split('T')[0]; // 格式化為 YYYY-MM-DD
+                            document.getElementById('endDate').value = endDate;
+                        
+                            // 計算上個月的今天
+                            const lastMonth = new Date();
+                            lastMonth.setMonth(today.getMonth() - 1);
+                            
+                            // 處理如果當前日期是3月31日且上個月沒有31日的情況
+                            if (lastMonth.getMonth() === today.getMonth() - 1 && lastMonth.getDate() !== today.getDate()) {
+                                lastMonth.setDate(0);
+                            }
+                        
+                            // 設定開始日期為上個月的今天
+                            const startDate = lastMonth.toISOString().split('T')[0];
+                            document.getElementById('startDate').value = startDate;
+                        </script>
+                        
                         <div class="a2">
-                            <label for="targetValue">訓練目標值 : </label>
-                            <input type="number" id="targetValue" name="targetValue" step="0.01" min="0" max="1">
+                            <label for="targetValue">訓練目標 </label>
+                            <select id="targetValue" name="targetValue">
+                                <option value="0.6">一般：可以最有效率的訓練Prompt</option>
+                                <option value="0.7">精準：會花費較多時間訓練</option>
+                                <option value="0.52">快速：快速得到訓練結果</option>
+                            </select>
                         </div>
+                        
                     </div>
                     <div class="a1">
                         <div class="a2">
@@ -157,7 +199,7 @@
                             </div>
                         </div>
                     </div>
-                    <div id="loadingMessage" style="display:none;">正在訓練中，請稍後...</div>
+                    <div id="loadingMessage" style="display:none;">正在訓練Prompt，請稍後...</div>
                 </div>
             </div>
         </div>

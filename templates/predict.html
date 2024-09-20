@@ -60,7 +60,8 @@
             background-color: #9D9D9D;
         }
 
-        #promptInput {
+        #promptInput ,
+        #newsInput{
             width: 100%;
             padding: 10px;
             border-radius: 10px;
@@ -131,11 +132,11 @@
                 <div class="col-md-10 col-lg-8 col-xl-7">
                     <div class="a1">
                         <div class="a2">
-                            <label for="promptInput"> 輸入指令 </label>
+                            <label for="promptInput">輸入指令</label>
                             <textarea id="promptInput" name="promptInput" rows="5" cols="40"></textarea>
                         </div>
                         <div class="a2">
-                            <label for="newsInput"> 輸入新聞 </label>
+                            <label for="newsInput">輸入新聞</label>
                             <textarea id="newsInput" name="newsInput" rows="5" cols="40"></textarea>
                         </div>
                         <div class="a2">
@@ -143,12 +144,39 @@
                                 <button onclick="predict_stock()" class="a4">預測股市</button>
                             </div>
                         </div>
+                        <script>
+                            let json_path = "static/predict_preview.json";
+    
+                            function preload() {
+                                // 使用 fetch 來載入 JSON 檔案
+                                fetch(json_path)
+                                    .then(response => {
+                                        if (!response.ok) {
+                                            throw new Error('Network response was not ok');
+                                        }
+                                        return response.json();
+                                    })
+                                    .then(data => {
+                                        // 將 JSON 資料填入 textarea
+                                        document.getElementById('promptInput').value = data.promptInput;
+                                        document.getElementById('newsInput').value = data.newsInput;
+                                    })
+                                    .catch(error => {
+                                        console.error('Error fetching JSON data:', error);
+                                    });
+                            }
+    
+                            // 在頁面載入時自動執行 preload 函數
+                            window.onload = preload;
+                        </script>
+
                     </div>
                     <div id="loadingMessage" style="display:none;">正在預測股市中，請稍後...</div>
                 </div>
             </div>
         </div>
     </article>
+
     <!-- Footer-->
     <footer class="border-top">
         <div class="container px-4 px-lg-5">
