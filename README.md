@@ -1,14 +1,16 @@
-## todo list
-UI/UX  
-企劃書  
-系統需求書  
-Demo 影片  
-
 # Gen-AI Stock Master
 
 LLM-Predict-Stock 是一個強大的股票預測工具，它使用先進的機器學習技術來預測股票價格。
 
-## 目錄
+# Branch 
+這個 Branch 是用來作回測的
+網站的 Branch 是 Website
+
+# 回測結果
+
+
+
+# 目錄
 - [Crawler](crawlers)
 - [History Data](history_data)
 - [變異程式](run_mutate_TX.ipynb)
