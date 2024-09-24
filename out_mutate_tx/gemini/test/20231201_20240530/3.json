@@ -484,7 +484,7 @@
                 "output_tokens": 2,
                 "total_tokens": 535
             },
-            "raw_data": "#unknown \n"
+            "raw_data": "#yes \n"
         },
         "20240830": {
             "token": {
@@ -496,11 +496,11 @@
         }
     },
     "eval_data": {
-        "tp": 1,
+        "tp": 2,
         "fp": 1,
         "tn": 0,
         "fn": 0,
-        "accuracy": 0.5,
-        "ev": 0.0008596328745927011
+        "accuracy": 0.6666666666666666,
+        "ev": 0.0015600040475934108
     }
 }
