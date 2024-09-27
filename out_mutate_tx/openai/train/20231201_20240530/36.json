@@ -1,0 +1,954 @@
+{
+    "model": "gpt-4o",
+    "temperature": 1,
+    "top_p": 0.9,
+    "seed": 0,
+    "init_prompt": "我們將按部就班地推進，以確保實現以下目標：\n\n1. 企業創新策略：這是所有目標的核心，無論是為了滿足客戶需求、吸引投資者，還是提升公司價值，都應以企業的創新策略為基礎。\n2. 滿足客戶需求：客戶需求是企業創新的主要驅動力，能否滿足客戶需求將直接影響創新的成功與否。\n3. 吸引投資者注意：投資者的關注和信任能為企業提供所需的資金和支持，這也是創新取得成功的重要標誌。",
+    "mutate_prompt": "我們將按步驟逐步推進，確保達成以下目標：\n\n1. 企業創新策略：這是所有目標的核心，無論是滿足客戶需求、吸引投資者，還是提升公司價值，都應以企業創新策略為基礎。\n2. 滿足客戶需求：客戶需求是企業創新的主要動力，能否滿足客戶需求將直接影響創新的成敗。\n3. 吸引投資者注意：投資者的關注和信任能為企業提供所需的資金和支持，這也是創新成功的重要標誌。",
+    "output_data": {
+        "20231204": {
+            "token": {
+                "input_tokens": 417,
+                "output_tokens": 2,
+                "total_tokens": 419
+            },
+            "raw_data": "#no"
+        },
+        "20231205": {
+            "token": {
+                "input_tokens": 475,
+                "output_tokens": 2,
+                "total_tokens": 477
+            },
+            "raw_data": "#no"
+        },
+        "20231206": {
+            "token": {
+                "input_tokens": 450,
+                "output_tokens": 2,
+                "total_tokens": 452
+            },
+            "raw_data": "#no"
+        },
+        "20231207": {
+            "token": {
+                "input_tokens": 345,
+                "output_tokens": 2,
+                "total_tokens": 347
+            },
+            "raw_data": "#yes"
+        },
+        "20231208": {
+            "token": {
+                "input_tokens": 565,
+                "output_tokens": 2,
+                "total_tokens": 567
+            },
+            "raw_data": "#yes"
+        },
+        "20231211": {
+            "token": {
+                "input_tokens": 370,
+                "output_tokens": 2,
+                "total_tokens": 372
+            },
+            "raw_data": "#unknown"
+        },
+        "20231212": {
+            "token": {
+                "input_tokens": 344,
+                "output_tokens": 2,
+                "total_tokens": 346
+            },
+            "raw_data": "#unknown"
+        },
+        "20231213": {
+            "token": {
+                "input_tokens": 466,
+                "output_tokens": 2,
+                "total_tokens": 468
+            },
+            "raw_data": "#yes"
+        },
+        "20231214": {
+            "token": {
+                "input_tokens": 479,
+                "output_tokens": 2,
+                "total_tokens": 481
+            },
+            "raw_data": "#yes"
+        },
+        "20231215": {
+            "token": {
+                "input_tokens": 568,
+                "output_tokens": 2,
+                "total_tokens": 570
+            },
+            "raw_data": "#yes"
+        },
+        "20231218": {
+            "token": {
+                "input_tokens": 338,
+                "output_tokens": 2,
+                "total_tokens": 340
+            },
+            "raw_data": "#unknown"
+        },
+        "20231219": {
+            "token": {
+                "input_tokens": 539,
+                "output_tokens": 2,
+                "total_tokens": 541
+            },
+            "raw_data": "#no"
+        },
+        "20231220": {
+            "token": {
+                "input_tokens": 492,
+                "output_tokens": 2,
+                "total_tokens": 494
+            },
+            "raw_data": "#unknown"
+        },
+        "20231221": {
+            "token": {
+                "input_tokens": 380,
+                "output_tokens": 2,
+                "total_tokens": 382
+            },
+            "raw_data": "#no"
+        },
+        "20231222": {
+            "token": {
+                "input_tokens": 577,
+                "output_tokens": 2,
+                "total_tokens": 579
+            },
+            "raw_data": "#no"
+        },
+        "20231225": {
+            "token": {
+                "input_tokens": 413,
+                "output_tokens": 2,
+                "total_tokens": 415
+            },
+            "raw_data": "#no"
+        },
+        "20231226": {
+            "token": {
+                "input_tokens": 468,
+                "output_tokens": 2,
+                "total_tokens": 470
+            },
+            "raw_data": "#no"
+        },
+        "20231227": {
+            "token": {
+                "input_tokens": 356,
+                "output_tokens": 2,
+                "total_tokens": 358
+            },
+            "raw_data": "#yes"
+        },
+        "20231228": {
+            "token": {
+                "input_tokens": 356,
+                "output_tokens": 2,
+                "total_tokens": 358
+            },
+            "raw_data": "#yes"
+        },
+        "20231229": {
+            "token": {
+                "input_tokens": 340,
+                "output_tokens": 2,
+                "total_tokens": 342
+            },
+            "raw_data": "#unknown"
+        },
+        "20240102": {
+            "token": {
+                "input_tokens": 435,
+                "output_tokens": 2,
+                "total_tokens": 437
+            },
+            "raw_data": "#no"
+        },
+        "20240103": {
+            "token": {
+                "input_tokens": 497,
+                "output_tokens": 2,
+                "total_tokens": 499
+            },
+            "raw_data": "#no"
+        },
+        "20240104": {
+            "token": {
+                "input_tokens": 390,
+                "output_tokens": 2,
+                "total_tokens": 392
+            },
+            "raw_data": "#unknown"
+        },
+        "20240105": {
+            "token": {
+                "input_tokens": 387,
+                "output_tokens": 2,
+                "total_tokens": 389
+            },
+            "raw_data": "#unknown"
+        },
+        "20240108": {
+            "token": {
+                "input_tokens": 352,
+                "output_tokens": 2,
+                "total_tokens": 354
+            },
+            "raw_data": "#yes"
+        },
+        "20240109": {
+            "token": {
+                "input_tokens": 358,
+                "output_tokens": 2,
+                "total_tokens": 360
+            },
+            "raw_data": "#unknown"
+        },
+        "20240110": {
+            "token": {
+                "input_tokens": 409,
+                "output_tokens": 2,
+                "total_tokens": 411
+            },
+            "raw_data": "#no"
+        },
+        "20240111": {
+            "token": {
+                "input_tokens": 624,
+                "output_tokens": 2,
+                "total_tokens": 626
+            },
+            "raw_data": "#no"
+        },
+        "20240112": {
+            "token": {
+                "input_tokens": 530,
+                "output_tokens": 2,
+                "total_tokens": 532
+            },
+            "raw_data": "#no"
+        },
+        "20240115": {
+            "token": {
+                "input_tokens": 436,
+                "output_tokens": 2,
+                "total_tokens": 438
+            },
+            "raw_data": "#yes"
+        },
+        "20240116": {
+            "token": {
+                "input_tokens": 469,
+                "output_tokens": 2,
+                "total_tokens": 471
+            },
+            "raw_data": "#unknown"
+        },
+        "20240117": {
+            "token": {
+                "input_tokens": 573,
+                "output_tokens": 2,
+                "total_tokens": 575
+            },
+            "raw_data": "#no"
+        },
+        "20240118": {
+            "token": {
+                "input_tokens": 495,
+                "output_tokens": 2,
+                "total_tokens": 497
+            },
+            "raw_data": "#unknown"
+        },
+        "20240119": {
+            "token": {
+                "input_tokens": 494,
+                "output_tokens": 2,
+                "total_tokens": 496
+            },
+            "raw_data": "#no"
+        },
+        "20240122": {
+            "token": {
+                "input_tokens": 422,
+                "output_tokens": 2,
+                "total_tokens": 424
+            },
+            "raw_data": "#yes"
+        },
+        "20240123": {
+            "token": {
+                "input_tokens": 405,
+                "output_tokens": 2,
+                "total_tokens": 407
+            },
+            "raw_data": "#yes"
+        },
+        "20240124": {
+            "token": {
+                "input_tokens": 643,
+                "output_tokens": 2,
+                "total_tokens": 645
+            },
+            "raw_data": "#yes"
+        },
+        "20240125": {
+            "token": {
+                "input_tokens": 592,
+                "output_tokens": 2,
+                "total_tokens": 594
+            },
+            "raw_data": "#no"
+        },
+        "20240126": {
+            "token": {
+                "input_tokens": 357,
+                "output_tokens": 2,
+                "total_tokens": 359
+            },
+            "raw_data": "#unknown"
+        },
+        "20240129": {
+            "token": {
+                "input_tokens": 464,
+                "output_tokens": 2,
+                "total_tokens": 466
+            },
+            "raw_data": "#yes"
+        },
+        "20240130": {
+            "token": {
+                "input_tokens": 509,
+                "output_tokens": 2,
+                "total_tokens": 511
+            },
+            "raw_data": "#unknown"
+        },
+        "20240131": {
+            "token": {
+                "input_tokens": 527,
+                "output_tokens": 2,
+                "total_tokens": 529
+            },
+            "raw_data": "#no"
+        },
+        "20240201": {
+            "token": {
+                "input_tokens": 534,
+                "output_tokens": 2,
+                "total_tokens": 536
+            },
+            "raw_data": "#no"
+        },
+        "20240202": {
+            "token": {
+                "input_tokens": 562,
+                "output_tokens": 2,
+                "total_tokens": 564
+            },
+            "raw_data": "#unknown"
+        },
+        "20240205": {
+            "token": {
+                "input_tokens": 390,
+                "output_tokens": 2,
+                "total_tokens": 392
+            },
+            "raw_data": "#no"
+        },
+        "20240215": {
+            "token": {
+                "input_tokens": 399,
+                "output_tokens": 2,
+                "total_tokens": 401
+            },
+            "raw_data": "#yes"
+        },
+        "20240216": {
+            "token": {
+                "input_tokens": 417,
+                "output_tokens": 2,
+                "total_tokens": 419
+            },
+            "raw_data": "#no"
+        },
+        "20240219": {
+            "token": {
+                "input_tokens": 626,
+                "output_tokens": 2,
+                "total_tokens": 628
+            },
+            "raw_data": "#yes"
+        },
+        "20240220": {
+            "token": {
+                "input_tokens": 449,
+                "output_tokens": 2,
+                "total_tokens": 451
+            },
+            "raw_data": "#yes"
+        },
+        "20240221": {
+            "token": {
+                "input_tokens": 553,
+                "output_tokens": 2,
+                "total_tokens": 555
+            },
+            "raw_data": "#no"
+        },
+        "20240222": {
+            "token": {
+                "input_tokens": 373,
+                "output_tokens": 2,
+                "total_tokens": 375
+            },
+            "raw_data": "#no"
+        },
+        "20240223": {
+            "token": {
+                "input_tokens": 383,
+                "output_tokens": 2,
+                "total_tokens": 385
+            },
+            "raw_data": "#unknown"
+        },
+        "20240226": {
+            "token": {
+                "input_tokens": 325,
+                "output_tokens": 2,
+                "total_tokens": 327
+            },
+            "raw_data": "#no"
+        },
+        "20240227": {
+            "token": {
+                "input_tokens": 544,
+                "output_tokens": 2,
+                "total_tokens": 546
+            },
+            "raw_data": "#no"
+        },
+        "20240229": {
+            "token": {
+                "input_tokens": 364,
+                "output_tokens": 2,
+                "total_tokens": 366
+            },
+            "raw_data": "#yes"
+        },
+        "20240301": {
+            "token": {
+                "input_tokens": 546,
+                "output_tokens": 2,
+                "total_tokens": 548
+            },
+            "raw_data": "#unknown"
+        },
+        "20240304": {
+            "token": {
+                "input_tokens": 511,
+                "output_tokens": 2,
+                "total_tokens": 513
+            },
+            "raw_data": "#yes"
+        },
+        "20240305": {
+            "token": {
+                "input_tokens": 467,
+                "output_tokens": 2,
+                "total_tokens": 469
+            },
+            "raw_data": "#unknown"
+        },
+        "20240306": {
+            "token": {
+                "input_tokens": 482,
+                "output_tokens": 2,
+                "total_tokens": 484
+            },
+            "raw_data": "#yes"
+        },
+        "20240307": {
+            "token": {
+                "input_tokens": 530,
+                "output_tokens": 2,
+                "total_tokens": 532
+            },
+            "raw_data": "#no"
+        },
+        "20240308": {
+            "token": {
+                "input_tokens": 572,
+                "output_tokens": 2,
+                "total_tokens": 574
+            },
+            "raw_data": "#yes"
+        },
+        "20240311": {
+            "token": {
+                "input_tokens": 405,
+                "output_tokens": 2,
+                "total_tokens": 407
+            },
+            "raw_data": "#yes"
+        },
+        "20240312": {
+            "token": {
+                "input_tokens": 345,
+                "output_tokens": 2,
+                "total_tokens": 347
+            },
+            "raw_data": "#no"
+        },
+        "20240313": {
+            "token": {
+                "input_tokens": 441,
+                "output_tokens": 2,
+                "total_tokens": 443
+            },
+            "raw_data": "#no"
+        },
+        "20240314": {
+            "token": {
+                "input_tokens": 612,
+                "output_tokens": 2,
+                "total_tokens": 614
+            },
+            "raw_data": "#yes"
+        },
+        "20240315": {
+            "token": {
+                "input_tokens": 462,
+                "output_tokens": 2,
+                "total_tokens": 464
+            },
+            "raw_data": "#no"
+        },
+        "20240318": {
+            "token": {
+                "input_tokens": 374,
+                "output_tokens": 2,
+                "total_tokens": 376
+            },
+            "raw_data": "#unknown"
+        },
+        "20240319": {
+            "token": {
+                "input_tokens": 366,
+                "output_tokens": 2,
+                "total_tokens": 368
+            },
+            "raw_data": "#unknown"
+        },
+        "20240320": {
+            "token": {
+                "input_tokens": 371,
+                "output_tokens": 2,
+                "total_tokens": 373
+            },
+            "raw_data": "#unknown"
+        },
+        "20240321": {
+            "token": {
+                "input_tokens": 577,
+                "output_tokens": 2,
+                "total_tokens": 579
+            },
+            "raw_data": "#yes"
+        },
+        "20240322": {
+            "token": {
+                "input_tokens": 504,
+                "output_tokens": 2,
+                "total_tokens": 506
+            },
+            "raw_data": "#yes"
+        },
+        "20240325": {
+            "token": {
+                "input_tokens": 453,
+                "output_tokens": 2,
+                "total_tokens": 455
+            },
+            "raw_data": "#unknown"
+        },
+        "20240326": {
+            "token": {
+                "input_tokens": 483,
+                "output_tokens": 2,
+                "total_tokens": 485
+            },
+            "raw_data": "#no"
+        },
+        "20240327": {
+            "token": {
+                "input_tokens": 504,
+                "output_tokens": 2,
+                "total_tokens": 506
+            },
+            "raw_data": "#yes"
+        },
+        "20240328": {
+            "token": {
+                "input_tokens": 570,
+                "output_tokens": 2,
+                "total_tokens": 572
+            },
+            "raw_data": "#yes"
+        },
+        "20240329": {
+            "token": {
+                "input_tokens": 507,
+                "output_tokens": 2,
+                "total_tokens": 509
+            },
+            "raw_data": "#yes"
+        },
+        "20240401": {
+            "token": {
+                "input_tokens": 442,
+                "output_tokens": 2,
+                "total_tokens": 444
+            },
+            "raw_data": "#yes"
+        },
+        "20240402": {
+            "token": {
+                "input_tokens": 530,
+                "output_tokens": 2,
+                "total_tokens": 532
+            },
+            "raw_data": "#yes"
+        },
+        "20240403": {
+            "token": {
+                "input_tokens": 464,
+                "output_tokens": 2,
+                "total_tokens": 466
+            },
+            "raw_data": "#unknown"
+        },
+        "20240408": {
+            "token": {
+                "input_tokens": 484,
+                "output_tokens": 2,
+                "total_tokens": 486
+            },
+            "raw_data": "#no"
+        },
+        "20240409": {
+            "token": {
+                "input_tokens": 641,
+                "output_tokens": 2,
+                "total_tokens": 643
+            },
+            "raw_data": "#yes"
+        },
+        "20240410": {
+            "token": {
+                "input_tokens": 395,
+                "output_tokens": 2,
+                "total_tokens": 397
+            },
+            "raw_data": "#yes"
+        },
+        "20240411": {
+            "token": {
+                "input_tokens": 596,
+                "output_tokens": 2,
+                "total_tokens": 598
+            },
+            "raw_data": "#yes"
+        },
+        "20240412": {
+            "token": {
+                "input_tokens": 533,
+                "output_tokens": 2,
+                "total_tokens": 535
+            },
+            "raw_data": "#yes"
+        },
+        "20240415": {
+            "token": {
+                "input_tokens": 481,
+                "output_tokens": 2,
+                "total_tokens": 483
+            },
+            "raw_data": "#no"
+        },
+        "20240416": {
+            "token": {
+                "input_tokens": 626,
+                "output_tokens": 2,
+                "total_tokens": 628
+            },
+            "raw_data": "#no"
+        },
+        "20240417": {
+            "token": {
+                "input_tokens": 536,
+                "output_tokens": 2,
+                "total_tokens": 538
+            },
+            "raw_data": "#yes"
+        },
+        "20240418": {
+            "token": {
+                "input_tokens": 506,
+                "output_tokens": 2,
+                "total_tokens": 508
+            },
+            "raw_data": "#yes"
+        },
+        "20240419": {
+            "token": {
+                "input_tokens": 418,
+                "output_tokens": 2,
+                "total_tokens": 420
+            },
+            "raw_data": "#no"
+        },
+        "20240422": {
+            "token": {
+                "input_tokens": 439,
+                "output_tokens": 2,
+                "total_tokens": 441
+            },
+            "raw_data": "#yes"
+        },
+        "20240423": {
+            "token": {
+                "input_tokens": 628,
+                "output_tokens": 2,
+                "total_tokens": 630
+            },
+            "raw_data": "#yes"
+        },
+        "20240424": {
+            "token": {
+                "input_tokens": 518,
+                "output_tokens": 2,
+                "total_tokens": 520
+            },
+            "raw_data": "#yes"
+        },
+        "20240425": {
+            "token": {
+                "input_tokens": 476,
+                "output_tokens": 2,
+                "total_tokens": 478
+            },
+            "raw_data": "#yes"
+        },
+        "20240426": {
+            "token": {
+                "input_tokens": 580,
+                "output_tokens": 2,
+                "total_tokens": 582
+            },
+            "raw_data": "#unknown"
+        },
+        "20240429": {
+            "token": {
+                "input_tokens": 486,
+                "output_tokens": 2,
+                "total_tokens": 488
+            },
+            "raw_data": "#yes"
+        },
+        "20240430": {
+            "token": {
+                "input_tokens": 544,
+                "output_tokens": 2,
+                "total_tokens": 546
+            },
+            "raw_data": "#yes"
+        },
+        "20240502": {
+            "token": {
+                "input_tokens": 354,
+                "output_tokens": 2,
+                "total_tokens": 356
+            },
+            "raw_data": "#unknown"
+        },
+        "20240503": {
+            "token": {
+                "input_tokens": 522,
+                "output_tokens": 2,
+                "total_tokens": 524
+            },
+            "raw_data": "#no"
+        },
+        "20240506": {
+            "token": {
+                "input_tokens": 380,
+                "output_tokens": 2,
+                "total_tokens": 382
+            },
+            "raw_data": "#yes"
+        },
+        "20240507": {
+            "token": {
+                "input_tokens": 459,
+                "output_tokens": 2,
+                "total_tokens": 461
+            },
+            "raw_data": "#yes"
+        },
+        "20240508": {
+            "token": {
+                "input_tokens": 586,
+                "output_tokens": 2,
+                "total_tokens": 588
+            },
+            "raw_data": "#yes"
+        },
+        "20240509": {
+            "token": {
+                "input_tokens": 550,
+                "output_tokens": 2,
+                "total_tokens": 552
+            },
+            "raw_data": "#yes"
+        },
+        "20240510": {
+            "token": {
+                "input_tokens": 574,
+                "output_tokens": 2,
+                "total_tokens": 576
+            },
+            "raw_data": "#no"
+        },
+        "20240513": {
+            "token": {
+                "input_tokens": 488,
+                "output_tokens": 2,
+                "total_tokens": 490
+            },
+            "raw_data": "#no"
+        },
+        "20240514": {
+            "token": {
+                "input_tokens": 620,
+                "output_tokens": 2,
+                "total_tokens": 622
+            },
+            "raw_data": "#yes"
+        },
+        "20240515": {
+            "token": {
+                "input_tokens": 584,
+                "output_tokens": 2,
+                "total_tokens": 586
+            },
+            "raw_data": "#yes"
+        },
+        "20240516": {
+            "token": {
+                "input_tokens": 580,
+                "output_tokens": 2,
+                "total_tokens": 582
+            },
+            "raw_data": "#yes"
+        },
+        "20240517": {
+            "token": {
+                "input_tokens": 517,
+                "output_tokens": 2,
+                "total_tokens": 519
+            },
+            "raw_data": "#yes"
+        },
+        "20240520": {
+            "token": {
+                "input_tokens": 586,
+                "output_tokens": 2,
+                "total_tokens": 588
+            },
+            "raw_data": "#unknown"
+        },
+        "20240521": {
+            "token": {
+                "input_tokens": 649,
+                "output_tokens": 2,
+                "total_tokens": 651
+            },
+            "raw_data": "#no"
+        },
+        "20240522": {
+            "token": {
+                "input_tokens": 631,
+                "output_tokens": 2,
+                "total_tokens": 633
+            },
+            "raw_data": "#yes"
+        },
+        "20240523": {
+            "token": {
+                "input_tokens": 636,
+                "output_tokens": 2,
+                "total_tokens": 638
+            },
+            "raw_data": "#yes"
+        },
+        "20240524": {
+            "token": {
+                "input_tokens": 645,
+                "output_tokens": 2,
+                "total_tokens": 647
+            },
+            "raw_data": "#yes"
+        },
+        "20240527": {
+            "token": {
+                "input_tokens": 477,
+                "output_tokens": 2,
+                "total_tokens": 479
+            },
+            "raw_data": "#yes"
+        },
+        "20240528": {
+            "token": {
+                "input_tokens": 495,
+                "output_tokens": 2,
+                "total_tokens": 497
+            },
+            "raw_data": "#yes"
+        },
+        "20240529": {
+            "token": {
+                "input_tokens": 611,
+                "output_tokens": 2,
+                "total_tokens": 613
+            },
+            "raw_data": "#yes"
+        },
+        "20240530": {
+            "token": {
+                "input_tokens": 446,
+                "output_tokens": 2,
+                "total_tokens": 448
+            },
+            "raw_data": "#no"
+        }
+    },
+    "eval_data": {
+        "tp": 37,
+        "fp": 18,
+        "tn": 21,
+        "fn": 17,
+        "accuracy": 0.6236559139784946,
+        "ev": 0.0026898518873680064
+    }
+}
