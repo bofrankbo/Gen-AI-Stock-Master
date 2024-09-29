@@ -163,14 +163,17 @@
                         <script>
                             // 取得今天的日期
                             const today = new Date();
+    
+                            // 將日期減去一天，設定為昨天
+                            today.setDate(today.getDate() - 1);
                             
                             // 設定結束日期為今天
                             const endDate = today.toISOString().split('T')[0]; // 格式化為 YYYY-MM-DD
                             document.getElementById('endDate').value = endDate;
-                        
+    
                             // 計算上個月的今天
                             const lastMonth = new Date();
-                            lastMonth.setMonth(today.getMonth() - 1);
+                            lastMonth.setMonth(today.getMonth() - 2);
                             
                             // 處理如果當前日期是3月31日且上個月沒有31日的情況
                             if (lastMonth.getMonth() === today.getMonth() - 1 && lastMonth.getDate() !== today.getDate()) {
@@ -181,7 +184,16 @@
                             const startDate = lastMonth.toISOString().split('T')[0];
                             document.getElementById('startDate').value = startDate;
                         </script>
-                        
+    
+                        <!-- 新增模型選擇選項 -->
+                        <div class="a2">
+                            <label for="modelType">選擇模型 : </label>
+                            <select id="modelType" name="modelType">
+                                <option value="gpt-4o">GPT-4o</option>
+                                <option value="gemini">Gemini</option>
+                            </select>
+                        </div>
+    
                         <div class="a2">
                             <label for="targetValue">訓練目標 </label>
                             <select id="targetValue" name="targetValue">
@@ -190,8 +202,8 @@
                                 <option value="0.52">快速：快速得到訓練結果</option>
                             </select>
                         </div>
-                        
                     </div>
+                    
                     <div class="a1">
                         <div class="a2">
                             <div class="a3">
@@ -204,6 +216,7 @@
             </div>
         </div>
     </article>
+    
     <!-- Footer-->
     <footer class="border-top">
         <div class="container px-4 px-lg-5">
@@ -245,6 +258,7 @@
             const startDate = document.getElementById('startDate').value;
             const endDate = document.getElementById('endDate').value;
             const targetValue = parseFloat(document.getElementById('targetValue').value);
+            const modelType = document.getElementById('modelType').value;
             const loadingMessage = document.getElementById('loadingMessage');
 
             if (isNaN(targetValue) || targetValue < 0 || targetValue > 1) {
@@ -258,7 +272,7 @@
             $.ajax({
                 url: "run_model",
                 type: "GET",
-                data: { start_date: startDate, end_date: endDate, target_value: targetValue },
+                data: { start_date: startDate, end_date: endDate, target_value: targetValue, modelType:modelType },
                 success: function (result) {
                     // 隱藏正在訓練中的訊息
                     loadingMessage.style.display = 'none';

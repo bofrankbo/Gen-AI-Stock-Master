@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, jsonify , Response, stream_with_context
 import news_title
-from run_mutate_TX import step1, step2, eval,to_markdown
+from run_mutate_TX import analy, mutate, eval
 from tqdm import tqdm
 
 import os
@@ -35,6 +35,20 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_google_genai import ChatGoogleGenerativeAI
 from google.generativeai.types import HarmBlockThreshold
 from google.ai.generativelanguage_v1 import HarmCategory
+
+import os
+import pandas as pd
+import numpy as np
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
+
+from langchain.schema.messages import AIMessage
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_openai import ChatOpenAI
+
+from IPython.display import display
+from IPython.display import Markdown
+
 current_file_path = os.path.abspath(__file__)
 
 print(f"Current file path: {current_file_path}")
@@ -181,6 +195,8 @@ def run_model():
         start_date_str = request.args.get('start_date')
         end_date_str = request.args.get('end_date')
         target_value = float(request.args.get('target_value'))
+        modelType = request.args.get('modelType')
+        print("Now running:  " + modelType)
         
         # 解析日期
         start_day = datetime.strptime(start_date_str, '%Y-%m-%d')
@@ -190,27 +206,34 @@ def run_model():
         if target_value < 0 or target_value > 1:
             return jsonify({'message': '訓練目標值必須在0到1之間'}), 400
         
-        
-        model = 'gemini-1.5-flash'
-        temperature = 1
-        top_p = 0.9
-        seed = 0
         load_dotenv()
 
-        llm = ChatGoogleGenerativeAI(
-                        #https://aistudio.google.com/app/u/1/apikey #api key查詢
-                        google_api_key = os.getenv('GOOGLE_API_KEY'),
-                        model=model,
-                        temperature=temperature,
-                        top_p=top_p,
-                        seed=seed,
-                        safety_settings={
-                                HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_NONE,
-                                HarmCategory.HARM_CATEGORY_HARASSMENT: HarmBlockThreshold.BLOCK_NONE,
-                                HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_NONE,
-                                HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT : HarmBlockThreshold.BLOCK_NONE,
-                        
-                    })
+        if modelType == "gpt-4o":
+            print("Using OpenAI model")
+            llm = ChatOpenAI(
+            openai_api_key = os.getenv('OPENAI_API_KEY'),
+            model="gpt-4o",
+            temperature=1,
+            top_p=0.9,
+            seed=0,
+            )
+        else:
+            print("Using Google model")
+            llm = ChatGoogleGenerativeAI(
+                            #https://aistudio.google.com/app/u/1/apikey #api key查詢
+                            google_api_key = os.getenv('GOOGLE_API_KEY'),
+                            model='gemini-1.5-flash',
+                            temperature=1,
+                            top_p=0.9,
+                            seed=0,
+                            safety_settings={
+                                    HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT: HarmBlockThreshold.BLOCK_NONE,
+                                    HarmCategory.HARM_CATEGORY_HARASSMENT: HarmBlockThreshold.BLOCK_NONE,
+                                    HarmCategory.HARM_CATEGORY_HATE_SPEECH: HarmBlockThreshold.BLOCK_NONE,
+                                    HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT : HarmBlockThreshold.BLOCK_NONE,
+                            
+                        })
+        
         # 初始化
         run_count = 1
         #start_day = datetime(2024, 5, 15)
@@ -236,8 +259,8 @@ def run_model():
             print(f"Run count: {run_count}")
             current_prompt, _ = prompt_stack[-1]  # 取得stack頂部的prompt和準確率
             mutate_prompt = init_prompt
-            mutate_prompt = step2(current_prompt)  # 生成變異prompt
-            outpath = step1(stock_ids, start_day, end_day, current_prompt,mutate_prompt, out_folder)
+            mutate_prompt = mutate(current_prompt, modelType, llm)  # 生成變異prompt
+            outpath = analy(stock_ids, start_day, end_day, current_prompt, mutate_prompt, out_folder, llm)
             acc, ev = eval(outpath)
             mutate_count += 1
 

@@ -7,17 +7,30 @@ import numpy as np
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 
-import google.generativeai as genai
 from langchain.schema.messages import AIMessage
 from langchain_core.prompts import ChatPromptTemplate
-from langchain_google_genai import ChatGoogleGenerativeAI
-from google.generativeai.types import HarmBlockThreshold
-from google.ai.generativelanguage_v1 import HarmCategory
+from langchain_openai import ChatOpenAI
 
 from IPython.display import display
 from IPython.display import Markdown
 
-from dotenv import load_dotenv
+# model = 'gpt-4o'
+model = 'gpt-4o'
+temperature = 1
+top_p = 0.9
+seed = 0
+
+def to_markdown(text):
+  text = text.replace('•', '  *')
+  return Markdown(textwrap.indent(text, '> ', predicate=lambda _: True))
+
+llm = ChatOpenAI(
+            openai_api_key = os.getenv('OPENAI_API_KEY'),
+            model=model,
+            temperature=temperature,
+            top_p=top_p,
+            seed=seed,
+            )
 
 '''--------------------------------------------------------------------------------------------------------------'''
 import pandas as pd
@@ -116,8 +129,7 @@ import json
 import pandas as pd
 from datetime import datetime, timedelta
 
-def analy(stock_ids, st, et, init_prompt, mutate_prompt, out_folder, llm):
-    print(f"analyzing from {st} to {et}, llm: {llm}")
+def step1(stock_ids, st, et, init_prompt, mutate_prompt, out_folder):
     out_path = out_folder
     count = 1
     while True:
@@ -190,6 +202,10 @@ def analy(stock_ids, st, et, init_prompt, mutate_prompt, out_folder, llm):
 
     # 將所有輸出數據寫入到同一個json檔案中
     data = {
+        "model": model,
+        "temperature": temperature,
+        "top_p": top_p,
+        "seed": seed,
         "init_prompt": init_prompt,
         "mutate_prompt": mutate_prompt,
         "output_data": output_data,
@@ -201,27 +217,16 @@ def analy(stock_ids, st, et, init_prompt, mutate_prompt, out_folder, llm):
     
     return out_file
 
-def mutate(text_in, traget_model, llm):
-    print(f"mutating, model {traget_model}, llm: {llm}")
-    if traget_model == "gpt-4o":
-        messages = [
-            ("human",
-            f"""
-            變異這個指令內容，並保留語意：{text_in}
-            只要回答變體的指令內容即可
-            """)
-        ]
-    else:
-        messages = [
-            ("human",
-            f"""
-            請用以下指令產生1個清晰和有條理的變體，同時保留語意：{text_in}
-            """)
-        ]
-
+def step2(text_in):
+    messages = [
+        ("human",
+        f"""
+        請用以下指令產生1個清晰和有條理的變體，同時保留語意：{text_in}
+        """)
+    ]
     response = llm.invoke(messages)
     # print(f'變異結果： {response.content}')
-    # time.sleep(60)
+    time.sleep(60)
     return response.content
 
 '''--------------------------------------------------------------------------------------------------------------'''
