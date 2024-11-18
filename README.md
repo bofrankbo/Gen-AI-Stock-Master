@@ -57,4 +57,10 @@ Organized and labeled datasets include:
 - **`twii_history`**: Daily Taiwan Index Futures prices sourced from the Taiwan Futures Exchange.  
 - **`news_title`**: Stock-related headlines crawled from Google News.  
 
+---
+
+## License
+
+This project is licensed under the [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) license.  
+![License: CC BY-NC](https://licensebuttons.net/l/by-nc/4.0/88x31.png)
 
