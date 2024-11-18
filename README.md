@@ -1,37 +1,60 @@
-# Gen-AI Stock Master
+# Gen-AI Stock Master  
+**Revolutionizing Stock Predictions with Advanced AI**  
 
-LLM-Predict-Stock 是一個強大的股票預測工具，它使用先進的機器學習技術來預測股票價格。
+[台灣中文](README.zh-TW.md) | [English](README.md)  
 
-# Branch 
-這個 Branch 是用來作回測的
-網站的 Branch 是 Website
+---
 
-# 回測結果
-訓練期間分為3個月、6個月、12個月
+## Overview  
+**LLM-Predict-Stock** is a cutting-edge stock forecasting tool leveraging advanced machine learning technologies to predict stock prices. With its robust algorithms and historical data analysis, it helps users optimize their trading strategies effectively.  
 
-4個月：  
-訓練時間 20240201～20240530  
-測試時間 20240601～20240915  
-Accuracy: 0.57143  
-Expected value: 0.00165  
-Precision: 0.71875  
+---
+
+## Features  
+✅ Real-time predictions.  
+✅ Data-driven insights.  
+✅ Comprehensive backtesting.  
+
+---
+
+## Branches  
+- **Main:** Backtesting module for historical performance evaluation.  
+- **Website:** Interface and user-friendly application.  
+
+---
+
+## Backtesting Results  
+**Training Period:** 2024/02/01 – 2024/05/30  
+**Testing Period:** 2024/06/01 – 2024/09/15  
+
+### Performance Metrics  
+- **Accuracy:** 57%  
+- **Expected Daily Return:** 0.00165  
+- **Precision:** 70%  
+
+During a volatile period, the Taiwan Weighted Index increased marginally by 1.017% (from 21388 to 21759). Our model’s daily expected return over the same period was 1.00165, leading to an **annualized return exceeding 40%**, after accounting for transaction costs (4 points).  
+
+> Additional training durations available: 3 months, 6 months, and 12 months.  
+
+---
+
+## Table of Contents  
+1. [Crawler 🕷️](#crawler)  
+2. [Historical Data 📈](#historical-data)  
+3. [Mutation Program](#mutation-program)  
+
+---
+
+### Crawler 🕷️  
+Efficiently scrapes:  
+- Historical stock market data.  
+- News headlines related to stock movements.  
+
+---
+
+### Historical Data 📈  
+Organized and labeled datasets include:  
+- **`twii_history`**: Daily Taiwan Index Futures prices sourced from the Taiwan Futures Exchange.  
+- **`news_title`**: Stock-related headlines crawled from Google News.  
 
 
-# 目錄
-- [Crawler](crawlers)
-- [History Data](history_data)
-- [變異程式](run_mutate_TX.ipynb)
-
-## Crawler 🕷️
-爬取過去的股票資訊，跟新聞標題
-
-## History Data 📈
-- twii_history：期交所公布的台指期貨的每日價格
-- news_title：從google 新聞爬股市新聞標題
-
-## 變異程式 🧑🏻‍💻
-設定初始的prompt 判斷漲跌並計算其準確率和期望值  
-再拿最高的年化報酬率的prompt變異
-建立stack 將prompt 依序由表現好排到表現差
-然後將比較好的拿來變異
-最好的promt變異五次如果準確率沒有提升，便將其刪除，改用第二好的prompt
